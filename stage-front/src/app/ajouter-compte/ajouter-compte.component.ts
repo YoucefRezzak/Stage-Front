@@ -15,14 +15,18 @@ export class AjouterCompteComponent implements OnInit {
   matt: number;
   soldee: number;
   nomm: string;
-  mat = true;
+  ttt = false;
   AjtTxt = 'Ajouter Compte';
+  comptes: Compte[] = [];
   constructor(private compteService: CompteService) { }
 
   ngOnInit() {
     this.compteService.messageTab$.subscribe(compte => {
       this.modifier(compte);
-      this.mat = false;
+      this.ttt = true;
+    });
+    this.compteService.getComptes().subscribe(res => {
+      this.comptes = res;
     });
   }
   ajouter(form: NgForm) {
@@ -36,6 +40,7 @@ export class AjouterCompteComponent implements OnInit {
       }
       if (this.matExist(form.value.mat)) {
         alert('Ce matricule existe déja! ');
+        form.resetForm();
         return;
       }
       try {
@@ -54,7 +59,7 @@ export class AjouterCompteComponent implements OnInit {
       try {
         this.compteService.updateCompte(form.value.nom, this.matt, form.value.solde);
         this.AjtTxt = 'Ajouter Compte';
-        this.mat = true;
+        this.ttt = false;
         form.controls.mat.enable();
         form.resetForm();
       } catch (err) {
@@ -74,7 +79,13 @@ export class AjouterCompteComponent implements OnInit {
   }
   // VERIFIE SI LE MATRICULE EXISTE DEJA!
   matExist(mat: number): boolean {
-    const b = false;
+    let b = false;
+    this.comptes.forEach(element => {
+      // tslint:disable-next-line: radix
+      if (parseInt(element.mat + '') === parseInt(mat + '')) {
+        b = true;
+      }
+    });
     return b;
   }
   modifier(compte: Compte) {

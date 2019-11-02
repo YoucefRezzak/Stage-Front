@@ -56,17 +56,17 @@ export class AjouterEcritureComponent implements OnInit {
                         '<br/>\nSomme : ' + this.Somme.value +
                         '<br/>\nMotif : ' + this.Motif.value;
   }
-  ajouter(stepper: MatStepper ) {
+  num(): number {
     let num = 1;
-    if (this.ecritures.length === 0) {
-      num = 1;
-    } else {
-      if (this.ecritures.length === 1) {
-        num = 2;
-      } else {
-        num = this.ecritures[this.ecritures.length - 1].num + 1;
+    this.ecritures.forEach(element => {
+      if (num === element.num) {
+        num += 1;
       }
-    }
+    });
+    return num;
+  }
+  ajouter(stepper: MatStepper ) {
+    const num = this.num();
     const somme = this.Somme.value as number;
     const matE = this.comptesEControl.value.mat;
     const matS = this.comptesRControl.value.mat;

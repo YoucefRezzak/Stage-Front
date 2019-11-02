@@ -24,7 +24,7 @@ export class CompteTableComponent implements OnInit {
       this.dataSource.data = this.ELEMENT_DATA;
       this.dataSource.sort = this.sort;
     });
-    this.compteService.updatCompte$.subscribe(compte =>{
+    this.compteService.updatCompte$.subscribe(compte => {
       this.ELEMENT_DATA.forEach(element => {
         if (element.mat === compte.mat) {
           element.nom = compte.nom;
@@ -53,7 +53,8 @@ export class CompteTableComponent implements OnInit {
   getTotal(): number {
     let  t = 0;
     this.ELEMENT_DATA.forEach(element => {
-        t += element.somme;
+        // tslint:disable-next-line: radix
+        t += parseInt(element.somme + '');
     });
     return t;
   }

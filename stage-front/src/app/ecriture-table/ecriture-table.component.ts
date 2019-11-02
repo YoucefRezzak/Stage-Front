@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { CompteService } from '../services/comptes.services';
 import { Compte } from '../compte.model';
 import { DatePipe } from '@angular/common';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-ecriture-table',
@@ -14,20 +15,34 @@ import { DatePipe } from '@angular/common';
 export class EcritureTableComponent implements OnInit {
   pipe = new DatePipe('en-US'); // Use your own locale
   constructor( private ecritureService: EcritureService, private compteService: CompteService) {}
-  public ELEMENT_DATA: Ecriture[] = [];
+  public ELEMENT_DATA: any[] = [];
   public comptes: Compte[] = [];
   private ecritureSub: Subscription;
   public result = '';
+  displayedColumns: string[] = ['Num', 'Date', 'Compte Envoyant', 'Compte Recevant', 'Somme', 'Motif', 'Supprimer'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   // tslint:disable-next-line: ban-types
   isExpansionDetailRow = (i: number, row: Object) => {
     return row.hasOwnProperty('detailRow');
   }
-
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   ngOnInit() {
     this.getListComptes();
 
-    this.ecritureService.insertEc$.subscribe(ecriture => {
-        this.ELEMENT_DATA.push(ecriture);
+    this.ecritureService.insertEc$.subscribe(element => {
+      const row = {num : element.num,
+          somme: element.somme,
+          matS: element.compteSmat,
+          matV: element.compteVMat,
+          motif: element.motif,
+          date: this.pipe.transform(element.date, 'yyyy-MM-dd'),
+          nomS: this.getCompte(element.compteSmat),
+          nomV: this.getCompte(element.compteVMat)
+        };
+      this.ELEMENT_DATA.push(row);
+      this.dataSource.data = this.ELEMENT_DATA;
     });
   }
   getListComptes() {
@@ -46,16 +61,20 @@ export class EcritureTableComponent implements OnInit {
           matS: element.compteSmat,
           matV: element.compteVMat,
           motif: element.motif,
-          date: element.date,
-          text : this.toString(element)});
+          date: this.pipe.transform(element.date, 'yyyy-MM-dd'),
+          nomS: this.getCompte(element.compteSmat),
+          nomV: this.getCompte(element.compteVMat)
+        });
       });
       this.ELEMENT_DATA = rows;
+      this.dataSource.data = rows;
     });
   }
   toString(ecriture: Ecriture): string {
-    const text = 'Compte envoyant : ' + this.getCompte(ecriture.compteSmat)
-                  + '<br/>\nCompte recevant : ' + this.getCompte(ecriture.compteVMat)
+    const text = 'Compte envoyant : ' + ecriture.compteSmat + ' ' + this.getCompte(ecriture.compteSmat)
+                  + '<br/>\nCompte recevant : ' + ecriture.compteVMat + ' ' + this.getCompte(ecriture.compteVMat)
                   + '<br/>\nSomme : ' + ecriture.somme
+                  + '<br/>\nMotif : ' + ecriture.motif
                   + '<br/>\nDate : ' +  this.pipe.transform(ecriture.date, 'yyyy-MM-dd');
     return text;
   }
@@ -63,13 +82,20 @@ export class EcritureTableComponent implements OnInit {
     let a = 'aaaa';
     this.comptes.forEach(element => {
       if (element.mat === mat) {
-        a = element.nom;
+        a = element.mat + ' ' + element.nom ;
       }
     });
     return a;
   }
+  getTotal(): number {
+    let a = 0;
+    this.ELEMENT_DATA.forEach(element => {
+      a += element.somme;
+    });
+    return a;
+  }
 
-  modifier(ecriture: Ecriture) {
+  supprimer(ecriture: Ecriture) {
 
   }
 }
