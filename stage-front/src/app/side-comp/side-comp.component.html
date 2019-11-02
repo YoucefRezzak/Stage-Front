@@ -1,0 +1,18 @@
+<mat-drawer-container class="example-container">
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()" class="buttonn">
+      Menu
+    </button>
+  </div>
+  <div>
+    <app-comptes></app-comptes>
+    <app-ecritures></app-ecritures>
+  </div>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <button mat-button (click)="ouvComptes()">Comptes</button> <br>
+    <button mat-button (click)="ouvEcritures()">Ecritures</button>
+  </mat-drawer>
+
+
+
+</mat-drawer-container>

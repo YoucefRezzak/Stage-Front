@@ -1,0 +1,14 @@
+<div *ngIf="show">
+  <h1>Ecritures</h1>
+<mat-tab-group mat-align-tabs="end"  [selectedIndex]="selectedTab">
+  <mat-tab label="Liste">
+    <h2> Liste des comptes</h2>
+    <app-ecriture-table></app-ecriture-table>
+   <!-- <app-compte-table></app-compte-table > -->
+  </mat-tab>
+  <mat-tab label="Ajouter">
+    <h2> Ajouter un compte</h2>
+    <app-ajouter-ecriture></app-ajouter-ecriture>
+  </mat-tab>
+</mat-tab-group>
+</div>

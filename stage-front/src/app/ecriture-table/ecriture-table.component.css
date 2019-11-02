@@ -1,0 +1,35 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.element-row {
+  position: relative;
+}
+
+.element-row:not(.expanded) {
+  cursor: pointer;
+}
+
+.element-row:not(.expanded):hover {
+  background: grey;
+}
+
+.element-row.expanded {
+  border-bottom-color: transparent;
+}
+p{
+padding:5px;
+margin-top:5px;
+margin-bottom:5px;
+margin-left:20px;
+margin-right:20px;
+}

@@ -1,0 +1,66 @@
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup" [editable]="true">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Compte Envoyant :</ng-template>
+      <mat-form-field class="ok">
+        <mat-label>Choisissez le compte svp : </mat-label>
+        <mat-select [formControl]="comptesEControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let compte of comptes" [value]="compte">
+            {{compte.nom + ' ' + compte.mat}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="comptesEControl.hasError('required')">Veuillez choisir un compte svp!</mat-error>
+        <mat-hint>{{comptesEControl.value?.sound}}</mat-hint>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" [editable]="true">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Compte Recevant :</ng-template>
+      <mat-form-field class="ok">
+        <mat-label>Choisissez le compte svp :</mat-label>
+        <mat-select [formControl]="comptesRControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let compte of comptes" [value]="compte">
+            {{compte.nom + ' ' + compte.mat}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="comptesRControl.hasError('required')">
+          Veuillez choisir un compte différent du premier svp!</mat-error>
+        <mat-hint>{{comptesRControl.value?.sound}}</mat-hint>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-button matStepperNext [disabled]="memeCompte()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" [editable]="true">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Somme envoyée :</ng-template>
+        <mat-form-field class="ok">
+          <input matInput placeholder="Somme" required [formControl]="Somme">
+        </mat-form-field>
+        <mat-form-field class="ok">
+            <input matInput placeholder="Motif" [formControl]="Motif">
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Retour</button>
+          <button mat-button matStepperNext (click)="infos()">Next</button>
+        </div>
+      </form>
+    </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Confirmation : </ng-template>
+    <h4> Confirmez ces informations :</h4>
+    <div [innerHTML]="informations"></div>
+    <div>
+      <button mat-button matStepperPrevious>Retour</button>
+      <button mat-button (click)="ajouter(); stepper.reset()" color="Accent">Confirmer</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

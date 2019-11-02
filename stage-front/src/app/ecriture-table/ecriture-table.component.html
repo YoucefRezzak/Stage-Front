@@ -1,0 +1,13 @@
+<mat-accordion multi="true" *ngIf="ELEMENT_DATA.length > 0">
+  <mat-expansion-panel *ngFor="let post of ELEMENT_DATA">
+    <mat-expansion-panel-header color="primary">
+      <mat-panel-title>
+          {{'ecriture ' + post.num}}
+      </mat-panel-title>
+      <mat-panel-description>
+          {{post.date | date:'yyyy-MM-dd' }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div [innerHTML]="post.text"></div>
+  </mat-expansion-panel>
+</mat-accordion>
