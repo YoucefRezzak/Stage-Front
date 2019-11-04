@@ -7,10 +7,14 @@
   <div>
     <app-comptes></app-comptes>
     <app-ecritures></app-ecritures>
+    <app-tableau-periode></app-tableau-periode>
+    <app-ec-co></app-ec-co>
   </div>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <button mat-button (click)="ouvComptes()">Comptes</button> <br>
-    <button mat-button (click)="ouvEcritures()">Ecritures</button>
+    <button mat-button (click)="ouvEcritures()">Ecritures</button> <br>
+    <button mat-button (click)="ouvMouv()">Mouvements</button> <br>
+    <button mat-button (click)="ouvEcComp()">Ecritures par compte</button>
   </mat-drawer>
 
 

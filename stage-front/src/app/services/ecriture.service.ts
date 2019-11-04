@@ -22,11 +22,17 @@ export class EcritureService {
   insertEc = new Subject<Ecriture>();
   insertEc$ = this.insertEc.asObservable();
 
+  showEcCo = new Subject();
+  showEcCo$ = this.showEcCo.asObservable();
+
+  showEC() {
+    this.showEcCo.next();
+  }
+
   showE() {
     this.show.next();
   }
   getEcritures(): Observable <Ecriture []> {
-    console.log('njibhom!');
     return this.http.get<Ecriture []>(this.adress + '/ecritures');
   }
   insertEcriture(nu: number, somm: number, compteSMat: number, compteVmat: number, moti: string, dat: Date) {

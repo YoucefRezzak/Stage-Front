@@ -11,7 +11,7 @@ import { CompteService } from '../services/comptes.services';
 })
 export class CompteTableComponent implements OnInit {
   public ELEMENT_DATA: Compte[] = [];
-  displayedColumns: string[] = ['Matricule', 'Nom', 'Somme', 'Modifier'];
+  displayedColumns: string[] = [ 'Matricule', 'Nom', 'Somme', 'Solde initial', 'Modifier' ] ;
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -58,7 +58,14 @@ export class CompteTableComponent implements OnInit {
     });
     return t;
   }
-
+  getTotalin(): number {
+    let  t = 0;
+    this.ELEMENT_DATA.forEach(element => {
+        // tslint:disable-next-line: radix
+        t += parseInt(element.soldein + '');
+    });
+    return t;
+  }
 }
 
 

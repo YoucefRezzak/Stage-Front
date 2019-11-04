@@ -45,6 +45,7 @@ export class AjouterCompteComponent implements OnInit {
       }
       try {
         this.compteService.insertCompte(form.value.nom, form.value.mat, form.value.solde);
+        this.comptes.push({mat: form.value.mat, nom: form.value.nom, somme: form.value.solde, soldein: form.value.solde });
         form.resetForm();
       } catch (err) {
         alert('Mauvais remplissage! 2');
@@ -83,6 +84,7 @@ export class AjouterCompteComponent implements OnInit {
     this.comptes.forEach(element => {
       // tslint:disable-next-line: radix
       if (parseInt(element.mat + '') === parseInt(mat + '')) {
+        console.log('mat exist!');
         b = true;
       }
     });

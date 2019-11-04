@@ -20,4 +20,12 @@ export class SideCompComponent implements OnInit {
     this.ecritureService.showE();
     this.showFiller = false;
   }
+  ouvMouv() {
+    this.compteService.showMouv();
+    this.showFiller = false;
+  }
+  ouvEcComp() {
+    this.ecritureService.showEC();
+    this.showFiller = false;
+  }
 }

@@ -20,6 +20,9 @@ export class CompteService {
   message = new Subject();
   message$ = this.message.asObservable();
 
+  showMou = new Subject();
+  showMou$ = this.showMou.asObservable();
+
   updatCompte = new Subject<Compte>();
   updatCompte$ = this.updatCompte.asObservable();
   httpOptionsProduit = {
@@ -37,6 +40,9 @@ export class CompteService {
   showComptes(): number {
     this.message.next();
     return 0;
+  }
+  showMouv() {
+    this.showMou.next();
   }
   sendtoList(compte: Compte ) {
     this.messageCompte.next(compte);
@@ -71,7 +77,7 @@ export class CompteService {
     }
   }
   insertCompte(no: string, ma: number, sold: number) {
-    const compte: Compte = {nom: no, mat: ma, somme: sold};
+    const compte: Compte = {nom: no, mat: ma, somme: sold, soldein: sold};
     try {
       this.http.post<Compte>('http://localhost:3000/comptes', JSON.stringify(compte), this.httpOptionsProduit).subscribe();
       this.sendtoList(compte);
@@ -83,7 +89,15 @@ export class CompteService {
     }
   }
   updateCompte(no: string, ma: number, sold: number) {
-    const compte: Compte = {nom: no, mat: ma, somme: sold};
+    let soldi: number;
+    this.getComptes().subscribe(res => {
+      res.forEach(element => {
+        if (element.mat === ma) {
+          soldi = element.soldein;
+        }
+      });
+    });
+    const compte: Compte = {nom: no, mat: ma, somme: sold, soldein: soldi};
     try {
       console.log('rah update now ! ');
       console.log('http://localhost:3000/comptes/' + compte.mat);

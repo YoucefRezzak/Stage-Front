@@ -18,6 +18,7 @@ export class AjouterEcritureComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   somme = 0;
+  numb = 0;
   motif = '';
   informations = '';
   comptes: Compte[] = [];
@@ -48,6 +49,7 @@ export class AjouterEcritureComponent implements OnInit {
     });
     this.ecritureService.getEcritures().subscribe(res => {
       this.ecritures = res;
+      this.numb = this.ecritures.length + 1;
     });
   }
   infos() {
@@ -57,13 +59,9 @@ export class AjouterEcritureComponent implements OnInit {
                         '<br/>\nMotif : ' + this.Motif.value;
   }
   num(): number {
-    let num = 1;
-    this.ecritures.forEach(element => {
-      if (num === element.num) {
-        num += 1;
-      }
-    });
-    return num;
+     const n = this.numb;
+     this.numb += 1;
+     return n ;
   }
   ajouter(stepper: MatStepper ) {
     const num = this.num();
@@ -73,6 +71,7 @@ export class AjouterEcritureComponent implements OnInit {
     const motif = this.Motif.value;
     const date: Date = new Date(Date.now());
     let ando = true;
+    // tslint:disable-next-line: no-shadowed-variable
     this.comptes.forEach(element => {
       if (element.mat === matE ) {
         if (somme > element.somme ) {
@@ -90,6 +89,7 @@ export class AjouterEcritureComponent implements OnInit {
     } finally { console.log('ajouté!'); }
   }
   sendMoney(matE: number, matS: number, somme: number) {
+    // tslint:disable-next-line: no-shadowed-variable
     this.comptes.forEach(element => {
       if (element.mat === matE) {
         this.compteService.lessMoney(element, somme);

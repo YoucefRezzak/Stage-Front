@@ -22,6 +22,12 @@
       <td mat-footer-cell *matFooterCellDef> {{getTotal()}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="Solde initial">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Solde initial </th>
+      <td mat-cell *matCellDef="let element"> {{element.soldein}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalin()}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="Modifier">
         <mat-header-cell  *matHeaderCellDef>  </mat-header-cell>
         <mat-cell *matCellDef="let row" >

@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+  min-width: 100%;
+  flex: 1;
+ }
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+.ok {
+  min-width: 100%;
+  overflow: auto;
+  height: 300px;
+}

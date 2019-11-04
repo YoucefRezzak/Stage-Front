@@ -15,11 +15,11 @@ import { MatTableDataSource } from '@angular/material';
 export class EcritureTableComponent implements OnInit {
   pipe = new DatePipe('en-US'); // Use your own locale
   constructor( private ecritureService: EcritureService, private compteService: CompteService) {}
-  public ELEMENT_DATA: any[] = [];
   public comptes: Compte[] = [];
   private ecritureSub: Subscription;
   public result = '';
   displayedColumns: string[] = ['Num', 'Date', 'Compte Envoyant', 'Compte Recevant', 'Somme', 'Motif', 'Supprimer'];
+  public ELEMENT_DATA: any[] = [];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   // tslint:disable-next-line: ban-types
   isExpansionDetailRow = (i: number, row: Object) => {
@@ -43,6 +43,7 @@ export class EcritureTableComponent implements OnInit {
         };
       this.ELEMENT_DATA.push(row);
       this.dataSource.data = this.ELEMENT_DATA;
+      this.dataSource.data.sort((a, b) => (a.num > b.num) ? 1 : -1);
     });
   }
   getListComptes() {
@@ -68,6 +69,7 @@ export class EcritureTableComponent implements OnInit {
       });
       this.ELEMENT_DATA = rows;
       this.dataSource.data = rows;
+      this.dataSource.data.sort((a, b) => (a.num > b.num) ? 1 : -1);
     });
   }
   toString(ecriture: Ecriture): string {

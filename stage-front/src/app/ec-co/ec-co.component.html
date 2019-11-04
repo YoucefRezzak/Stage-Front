@@ -1,0 +1,20 @@
+<div *ngIf="show">
+    <h3>Liste : </h3>
+<mat-accordion multi="true" *ngIf="comptes.length > 0">
+  <mat-expansion-panel *ngFor="let compte of comptes">
+    <mat-expansion-panel-header color="primary">{{compte.mat}}</mat-expansion-panel-header>
+    <mat-panel-description>{{compte.nom}}</mat-panel-description>
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile>
+        <!-- PREMIER TABLEAU -->
+        <app-ec-co-table [compte]="compte" [recu]="false"></app-ec-co-table>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <!--CREDIT !-->
+        <app-ec-co-table [compte]="compte" [recu]="true"></app-ec-co-table>
+
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-expansion-panel>
+</mat-accordion>
+</div>

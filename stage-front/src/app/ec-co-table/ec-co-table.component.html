@@ -1,0 +1,40 @@
+<div class="ok">
+  <h4> {{whatIsThis}} </h4> <br>
+<table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="Ecriture">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ecriture </th>
+      <td mat-cell *matCellDef="let element"> {{element.num}} </td>
+      <td mat-footer-cell *matFooterCellDef> Total </td>
+    </ng-container>
+  <!--  displayedColumns: string[] = ['Ecriture', '', '', '', 'Date'];
+-->
+    <ng-container matColumnDef="Compte">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Compte </th>
+      <td mat-cell *matCellDef="let element"> {{element.mat}} </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="Somme">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Somme </th>
+      <td mat-cell *matCellDef="let element"> {{element.somme}} </td>
+      <td mat-footer-cell *matFooterCellDef>{{getTotal()}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Motif">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Motif </th>
+      <td mat-cell *matCellDef="let element"> {{element.motif}} </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+  </table>
+</div>

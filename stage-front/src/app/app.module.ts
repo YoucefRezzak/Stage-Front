@@ -5,7 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule, MatCardModule, MatButtonModule,
         MatToolbarModule, MatExpansionModule, MatSidenavModule, MatTabsModule,
         MatFormFieldModule, MatTableModule, MatSortModule, MatStepperModule,
-        MatSelectModule} from '@angular/material';
+        MatSelectModule, MatDatepickerModule, MatNativeDateModule,
+        MatGridListModule} from '@angular/material';
 import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,9 @@ import { EcrituresComponent } from './ecritures/ecritures.component';
 import { EcritureService } from './services/ecriture.service';
 import { EcritureTableComponent } from './ecriture-table/ecriture-table.component';
 import { AjouterEcritureComponent } from './ajouter-ecriture/ajouter-ecriture.component';
+import { TableauPeriodeComponent } from './tableau-periode/tableau-periode.component';
+import { EcCoComponent } from './ec-co/ec-co.component';
+import { EcCoTableComponent } from './ec-co-table/ec-co-table.component';
 
 
 @NgModule({
@@ -39,16 +43,22 @@ import { AjouterEcritureComponent } from './ajouter-ecriture/ajouter-ecriture.co
     EcrituresComponent,
     EcritureTableComponent,
     AjouterEcritureComponent,
+    TableauPeriodeComponent,
+    EcCoComponent,
+    EcCoTableComponent,
   ],
   imports: [
     BrowserModule,
+    MatDatepickerModule,
     MatSortModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatNativeDateModule,
     ReactiveFormsModule,
     MatInputModule,
     MatToolbarModule,
+    MatGridListModule,
     MatCardModule,
     MatFormFieldModule,
     DataTablesModule,
