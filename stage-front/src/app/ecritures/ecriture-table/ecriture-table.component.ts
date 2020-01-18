@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EcritureService } from '../services/ecriture.service';
-import { Ecriture } from '../ecriture.model';
+import { EcritureService } from '../../services/ecriture.service';
+import { Ecriture } from '../../ecriture.model';
 import { Subscription } from 'rxjs';
-import { CompteService } from '../services/comptes.services';
-import { Compte } from '../compte.model';
+import { CompteService } from '../../services/comptes.services';
+import { Compte } from '../../compte.model';
 import { DatePipe } from '@angular/common';
 import { MatTableDataSource } from '@angular/material';
 

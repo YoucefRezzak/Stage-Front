@@ -1,22 +1,19 @@
-<mat-drawer-container class="example-container">
-  <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()" class="buttonn">
-      Menu
-    </button>
-  </div>
-  <div>
-    <app-comptes></app-comptes>
-    <app-ecritures></app-ecritures>
-    <app-tableau-periode></app-tableau-periode>
-    <app-ec-co></app-ec-co>
-  </div>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <button mat-button (click)="ouvComptes()">Comptes</button> <br>
-    <button mat-button (click)="ouvEcritures()">Ecritures</button> <br>
-    <button mat-button (click)="ouvMouv()">Mouvements</button> <br>
-    <button mat-button (click)="ouvEcComp()">Ecritures par compte</button>
-  </mat-drawer>
-
-
-
-</mat-drawer-container>
+<mat-card *ngIf="showFiller">
+<mat-tab-group >
+  <mat-tab label="Comptes">
+    <app-classes></app-classes>
+  </mat-tab>
+      <mat-tab label="Comptes">
+        <app-comptes></app-comptes>
+      </mat-tab>
+      <mat-tab label="Ecritures">
+        <app-ecritures></app-ecritures>
+      </mat-tab>
+      <mat-tab label="Tableau periode">
+        <app-tableau-periode></app-tableau-periode>
+      </mat-tab>
+      <mat-tab label="aa">
+        <app-ec-co></app-ec-co>
+      </mat-tab>
+</mat-tab-group>
+</mat-card>

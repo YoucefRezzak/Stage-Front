@@ -1,37 +1,36 @@
 import { Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
-import { CompteService } from '../services/comptes.services';
+import { ClasseService } from '../../services/classes.service';
 import { isNumber } from 'util';
-import {Compte } from '../compte.model';
+import {Classe } from '../../Classe.model';
 
 @Component({
-  selector: 'app-ajouter-compte',
-  templateUrl: './ajouter-compte.component.html',
-  styleUrls: ['./ajouter-compte.component.css']
+  selector: 'app-classe-ajouter',
+  templateUrl: './classe-ajouter.component.html',
+  styleUrls: ['./classe-ajouter.component.css']
 })
-/* after modif  : change f tableau
-    change button */
-export class AjouterCompteComponent implements OnInit {
+export class ClasseAjouterComponent implements OnInit {
   matt: number;
   soldee: number;
   nomm: string;
   ttt = false;
-  AjtTxt = 'Ajouter Compte';
-  comptes: Compte[] = [];
-  constructor(private compteService: CompteService) { }
+  AjtTxt = 'Ajouter classe';
+  classes: Classe[] = [];
+  constructor(private classeService: ClasseService) { }
 
   ngOnInit() {
-    this.compteService.messageTab$.subscribe(compte => {
+    this.classeService.getClasses().subscribe(res => {
+      this.classes = res;
+    });
+    this.classeService.messageTab$.subscribe(compte => {
       this.modifier(compte);
       this.ttt = true;
     });
-    this.compteService.getComptes().subscribe(res => {
-      this.comptes = res;
-    });
+
   }
   ajouter(form: NgForm) {
     console.log(this.AjtTxt);
-    if (this.AjtTxt === 'Ajouter Compte') {
+    if (this.AjtTxt === 'Ajouter classe') {
       console.log(this.AjtTxt);
       if (!(form.valid && this.noValid(form))) {
         alert('Mauvais remplissage!');
@@ -44,8 +43,9 @@ export class AjouterCompteComponent implements OnInit {
         return;
       }
       try {
-        this.compteService.insertCompte(form.value.nom, form.value.mat, form.value.solde);
-        this.comptes.push({mat: form.value.mat, nom: form.value.nom, somme: form.value.solde, soldein: form.value.solde });
+        this.classeService.insertClasse(form.value.nom, form.value.mat, form.value.solde);
+        console.log('c bon');
+        this.classes.push({num: form.value.mat, nom: form.value.nom, somme: form.value.solde});
         form.resetForm();
       } catch (err) {
         alert('Mauvais remplissage! 2');
@@ -58,7 +58,7 @@ export class AjouterCompteComponent implements OnInit {
         return;
       }
       try {
-        this.compteService.updateCompte(form.value.nom, this.matt, form.value.solde);
+        this.classeService.updateClasse(form.value.nom, this.matt, form.value.solde);
         this.AjtTxt = 'Ajouter Compte';
         this.ttt = false;
         form.controls.mat.enable();
@@ -81,19 +81,19 @@ export class AjouterCompteComponent implements OnInit {
   // VERIFIE SI LE MATRICULE EXISTE DEJA!
   matExist(mat: number): boolean {
     let b = false;
-    this.comptes.forEach(element => {
+    this.classes.forEach(element => {
       // tslint:disable-next-line: radix
-      if (parseInt(element.mat + '') === parseInt(mat + '')) {
+      if (parseInt(element.num + '') === parseInt(mat + '')) {
         console.log('mat exist!');
         b = true;
       }
     });
     return b;
   }
-  modifier(compte: Compte) {
-    this.matt = compte.mat;
-    this.nomm = compte.nom;
-    this.soldee = compte.somme;
-    this.AjtTxt = 'Modifier Compte';
+  modifier(classe: Classe) {
+    this.matt = classe.num;
+    this.nomm = classe.nom;
+    this.soldee = classe.somme;
+    this.AjtTxt = 'Modifier classe';
   }
 }

@@ -8,24 +8,12 @@ import {EcritureService } from '../services/ecriture.service';
   styleUrls: ['./side-comp.component.css']
 })
 export class SideCompComponent implements OnInit {
-  showFiller = false;
+  showFiller = true;
   constructor(private compteService: CompteService, private ecritureService: EcritureService) { }
   ngOnInit() {
+
   }
   ouvComptes() {
-    const i = this.compteService.showComptes();
-    this.showFiller = false;
-  }
-  ouvEcritures() {
-    this.ecritureService.showE();
-    this.showFiller = false;
-  }
-  ouvMouv() {
-    this.compteService.showMouv();
-    this.showFiller = false;
-  }
-  ouvEcComp() {
-    this.ecritureService.showEC();
-    this.showFiller = false;
+    this.showFiller = true;
   }
 }

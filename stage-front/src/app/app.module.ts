@@ -6,36 +6,35 @@ import {MatInputModule, MatCardModule, MatButtonModule,
         MatToolbarModule, MatExpansionModule, MatSidenavModule, MatTabsModule,
         MatFormFieldModule, MatTableModule, MatSortModule, MatStepperModule,
         MatSelectModule, MatDatepickerModule, MatNativeDateModule,
-        MatGridListModule} from '@angular/material';
+        MatGridListModule, MatAutocompleteModule} from '@angular/material';
 import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { PostListComponent } from './post-list/post-list.component';
 import { PostConService } from './services/con.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { SideCompComponent } from './side-comp/side-comp.component';
 import { ComptesComponent } from './comptes/comptes.component';
 import {CompteService } from './services/comptes.services';
-import { CompteTableComponent } from './compte-table/compte-table.component';
-import { AjouterCompteComponent } from './ajouter-compte/ajouter-compte.component';
+import { CompteTableComponent } from './comptes/compte-table/compte-table.component';
+import { AjouterCompteComponent } from './comptes/ajouter-compte/ajouter-compte.component';
 import { EcrituresComponent } from './ecritures/ecritures.component';
 import { EcritureService } from './services/ecriture.service';
-import { EcritureTableComponent } from './ecriture-table/ecriture-table.component';
-import { AjouterEcritureComponent } from './ajouter-ecriture/ajouter-ecriture.component';
+import { EcritureTableComponent } from './ecritures/ecriture-table/ecriture-table.component';
+import { AjouterEcritureComponent } from './ecritures/ajouter-ecriture/ajouter-ecriture.component';
 import { TableauPeriodeComponent } from './tableau-periode/tableau-periode.component';
 import { EcCoComponent } from './ec-co/ec-co.component';
-import { EcCoTableComponent } from './ec-co-table/ec-co-table.component';
-
+import { EcCoTableComponent } from './ec-co/ec-co-table/ec-co-table.component';
+import { ClassesComponent } from './classes/classes.component';
+import { ClassTableComponent } from './classes/class-table/class-table.component';
+import { ClasseAjouterComponent } from './classes/classe-ajouter/classe-ajouter.component';
+import { ClasseService } from './services/classes.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
     ToolbarComponent,
-    PostListComponent,
     SideCompComponent,
     ComptesComponent,
     CompteTableComponent,
@@ -46,9 +45,13 @@ import { EcCoTableComponent } from './ec-co-table/ec-co-table.component';
     TableauPeriodeComponent,
     EcCoComponent,
     EcCoTableComponent,
+    ClassesComponent,
+    ClassTableComponent,
+    ClasseAjouterComponent,
   ],
   imports: [
     BrowserModule,
+    MatAutocompleteModule,
     MatDatepickerModule,
     MatSortModule,
     AppRoutingModule,
@@ -71,7 +74,7 @@ import { EcCoTableComponent } from './ec-co-table/ec-co-table.component';
     MatTableModule,
     MatTabsModule
   ],
-  providers: [PostConService, HttpClient, CompteService, EcritureService],
+  providers: [PostConService, HttpClient, CompteService, EcritureService, ClasseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

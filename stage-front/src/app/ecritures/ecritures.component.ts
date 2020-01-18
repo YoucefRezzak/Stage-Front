@@ -6,7 +6,7 @@ import { EcritureService } from '../services/ecriture.service';
   styleUrls: ['./ecritures.component.css']
 })
 export class EcrituresComponent implements OnInit {
-  show = false;
+  show = true;
   selectedTab = 0;
   constructor(private ecritureService: EcritureService) { }
 

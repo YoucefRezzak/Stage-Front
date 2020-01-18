@@ -12,7 +12,7 @@ import {Ecriture} from '../ecriture.model';
 export class EcCoComponent implements OnInit {
   comptes: Compte [] = [];
   ecritures: Ecriture [] = [];
-  show = false;
+  show = true;
 
   constructor(private compteService: CompteService, private ecritureService: EcritureService) { }
 

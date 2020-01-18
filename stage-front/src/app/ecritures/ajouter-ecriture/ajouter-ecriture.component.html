@@ -1,17 +1,14 @@
 <mat-horizontal-stepper linear #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="true">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Compte Envoyant :</ng-template>
-      <mat-form-field class="ok">
-        <mat-label>Choisissez le compte svp : </mat-label>
-        <mat-select [formControl]="comptesEControl" required>
-          <mat-option>--</mat-option>
-          <mat-option *ngFor="let compte of comptes" [value]="compte">
-            {{compte.nom + ' ' + compte.mat}}
+    <form *ngIf="options" [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Compte Débitaire :</ng-template>
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Compte" aria-label="Number" matInput [formControl]="comptesEControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
           </mat-option>
-        </mat-select>
-        <mat-error *ngIf="comptesEControl.hasError('required')">Veuillez choisir un compte svp!</mat-error>
-        <mat-hint>{{comptesEControl.value?.sound}}</mat-hint>
+        </mat-autocomplete>
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>
@@ -20,15 +17,14 @@
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" [editable]="true">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Compte Recevant :</ng-template>
-      <mat-form-field class="ok">
-        <mat-label>Choisissez le compte svp :</mat-label>
-        <mat-select [formControl]="comptesRControl" required>
-          <mat-option>--</mat-option>
-          <mat-option *ngFor="let compte of comptes" [value]="compte">
-            {{compte.nom + ' ' + compte.mat}}
+      <ng-template matStepLabel>Compte Creditaire :</ng-template>
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Compte" aria-label="Number" matInput [formControl]="comptesRControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let optionn of filteredOptions2 | async" [value]="optionn">
+            {{optionn}}
           </mat-option>
-        </mat-select>
+        </mat-autocomplete>
         <mat-error *ngIf="comptesRControl.hasError('required')">
           Veuillez choisir un compte différent du premier svp!</mat-error>
         <mat-hint>{{comptesRControl.value?.sound}}</mat-hint>

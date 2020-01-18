@@ -1,0 +1,13 @@
+<div>
+  <h1>Classes </h1>
+  <mat-tab-group mat-align-tabs="end" *ngIf="show" [selectedIndex]="selectedTab">
+    <mat-tab label="Liste">
+      <h2> Liste des classes</h2>
+      <app-class-table></app-class-table>
+    </mat-tab>
+    <mat-tab label="Ajouter">
+      <h2> Ajouter une classe</h2>
+      <app-classe-ajouter></app-classe-ajouter>
+    </mat-tab>
+  </mat-tab-group>
+  </div>

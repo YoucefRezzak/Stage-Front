@@ -22,7 +22,7 @@ export class TableauPeriodeComponent implements OnInit {
   dateDebut: Date = new Date('0001-01-01');
   dateFin: Date = new Date('9999-12-31');
   allTime = true;
-  show = false;
+  show = true;
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     this.dateDebut = event.value;

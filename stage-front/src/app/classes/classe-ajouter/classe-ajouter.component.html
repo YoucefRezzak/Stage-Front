@@ -1,0 +1,28 @@
+<mat-card>
+  <form (submit)="ajouter(postForm)" class="example-form" #postForm="ngForm">
+    <mat-form-field appearance="outline"  class="example-full-width" >
+      <mat-label>Numéro De La Classe</mat-label>
+      <input matInput placeholder="Numéro de classe" ngModel
+      name ="mat" #mat id="mat"  required [disabled]="ttt"
+      color="primary" #mat="ngModel" [(ngModel)]='matt'  >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline"  class="example-full-width">
+      <mat-label>Libellé</mat-label>
+      <input matInput placeholder="Libellé" ngModel
+      name ="nom" #nom id="nom"  required
+      color="primary" #nom="ngModel" [(ngModel)]='nomm'>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Solde Initial</mat-label>
+      <input matInput placeholder="Solde du compte" ngModel
+      name ="solde" #solde id="solde"  required
+      color="primary" #solde="ngModel" [(ngModel)]='soldee'>
+    </mat-form-field>
+    <button mat-raised-button
+    color="primary"
+    name="buttonAj" ngDefaultControl
+    type="submit">{{AjtTxt}}</button>
+  </form>
+</mat-card>

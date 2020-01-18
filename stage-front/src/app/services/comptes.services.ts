@@ -76,19 +76,19 @@ export class CompteService {
       return;
     }
   }
-  insertCompte(no: string, ma: number, sold: number) {
-    const compte: Compte = {nom: no, mat: ma, somme: sold, soldein: sold};
+  insertCompte(no: string, ma: number, sold: number, classee: number) {
+    const compte: Compte = {nom: no, mat: ma, somme: sold, soldein: sold, classe: classee};
     try {
       this.http.post<Compte>('http://localhost:3000/comptes', JSON.stringify(compte), this.httpOptionsProduit).subscribe();
-      this.sendtoList(compte);
       this.changerTab();
+      this.sendtoList(compte);
       return;
     } catch (err) {
       console.log('mafihach');
       return;
     }
   }
-  updateCompte(no: string, ma: number, sold: number) {
+  updateCompte(no: string, ma: number, sold: number, classs: number) {
     let soldi: number;
     this.getComptes().subscribe(res => {
       res.forEach(element => {
@@ -97,10 +97,8 @@ export class CompteService {
         }
       });
     });
-    const compte: Compte = {nom: no, mat: ma, somme: sold, soldein: soldi};
+    const compte: Compte = {nom: no, mat: ma, somme: sold, soldein: soldi, classe: classs};
     try {
-      console.log('rah update now ! ');
-      console.log('http://localhost:3000/comptes/' + compte.mat);
       this.http.patch<Compte>('http://localhost:3000/comptes/' + compte.mat,
       JSON.stringify(compte), this.httpOptionsProduit).subscribe();
       this.updatCompte.next(compte);

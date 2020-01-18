@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {CompteService} from '../services/comptes.services';
-import {EcritureService} from '../services/ecriture.service';
-import {Compte} from '../compte.model';
-import {Ecriture} from '../ecriture.model';
+import {CompteService} from '../../services/comptes.services';
+import {EcritureService} from '../../services/ecriture.service';
+import {Compte} from '../../compte.model';
+import {Ecriture} from '../../ecriture.model';
 import { MatTableDataSource } from '@angular/material';
 import { DatePipe } from '@angular/common';
 @Component({
@@ -22,8 +22,6 @@ export class EcCoTableComponent implements OnInit {
   constructor(private compteService: CompteService, private ecritureService: EcritureService) { }
 
   ngOnInit() {
-    console.log(this.recu);
-    console.log(this.compte.mat);
     if (this.recu) {
       this.whatIsThis = 'Les Credits : ';
     } else {

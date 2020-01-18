@@ -10,7 +10,7 @@ export class ComptesComponent implements OnInit {
   selectedTab = 0;
   constructor(  private compteService: CompteService   ) { }
   private sho: Subscription;
-  show = false;
+  show = true;
 
   ngOnInit() {
     this.compteService.changeTab$.subscribe(() => {
@@ -23,12 +23,9 @@ export class ComptesComponent implements OnInit {
   }
 
   changeTab() {
-    console.log('je change de tab! ');
     if (this.selectedTab === 0) {
-      console.log('0 welat 1');
       this.selectedTab = 1;
     } else {
-      console.log('1 welat 0');
       this.selectedTab = 0;
     }
   }

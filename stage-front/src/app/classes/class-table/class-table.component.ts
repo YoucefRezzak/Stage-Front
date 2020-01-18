@@ -1,32 +1,33 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-import {Compte} from '../compte.model';
-import { CompteService } from '../services/comptes.services';
+import {Classe} from '../../classe.model';
+import { ClasseService } from '../../services/classes.service';
 
 @Component({
-  selector: 'app-compte-table',
-  templateUrl: './compte-table.component.html',
-  styleUrls: ['./compte-table.component.css']
+  selector: 'app-class-table',
+  templateUrl: './class-table.component.html',
+  styleUrls: ['./class-table.component.css']
 })
-export class CompteTableComponent implements OnInit {
-  public ELEMENT_DATA: Compte[] = [];
-  displayedColumns: string[] = [ 'Matricule', 'Nom', 'Somme', 'Solde initial', 'Modifier' ] ;
+export class ClassTableComponent implements OnInit {
+  public ELEMENT_DATA: Classe[] = [];
+  displayedColumns: string[] = [ 'Num', 'Nom', 'Somme', 'Modifier' ] ;
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor( private compteService: CompteService) {}
+  constructor( private classService: ClasseService) {}
 
   ngOnInit() {
-    this.getComptes();
-    this.compteService.messageCompte$.subscribe(compte => {
+    this.getClasses();
+    this.dataSource.sort = this.sort;
+    this.classService.messageCompte$.subscribe(compte => {
       this.ELEMENT_DATA.push(compte);
       this.dataSource.data = this.ELEMENT_DATA;
       this.dataSource.sort = this.sort;
     });
-    this.compteService.updatCompte$.subscribe(compte => {
+    this.classService.updatCompte$.subscribe(compte => {
       this.ELEMENT_DATA.forEach(element => {
-        if (element.mat === compte.mat) {
+        if (element.num === compte.num) {
           element.nom = compte.nom;
           element.somme = compte.somme;
         }
@@ -37,8 +38,8 @@ export class CompteTableComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  getComptes() {
-    this.compteService.getComptes().subscribe( (res) => {
+  getClasses() {
+    this.classService.getClasses().subscribe( (res) => {
       this.ELEMENT_DATA = res;
       this.dataSource.data = this.ELEMENT_DATA;
       this.dataSource.sort = this.sort;
@@ -46,8 +47,8 @@ export class CompteTableComponent implements OnInit {
     });
     return;
   }
-  modifier(compte: Compte) {
-    this.compteService.modifier(compte);
+  modifier(classe: Classe) {
+    this.classService.modifier(classe);
     console.log('changer tab! ');
   }
   getTotal(): number {
@@ -58,16 +59,4 @@ export class CompteTableComponent implements OnInit {
     });
     return t;
   }
-  getTotalin(): number {
-    let  t = 0;
-    this.ELEMENT_DATA.forEach(element => {
-        // tslint:disable-next-line: radix
-        t += parseInt(element.soldein + '');
-    });
-    return t;
-  }
 }
-
-
-
-
